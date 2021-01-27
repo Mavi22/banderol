@@ -8,9 +8,15 @@ import { HeaderComponent } from './header/components/header.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { FooterComponent } from './footer/components/footer.component'
 
+const components = [AppComponent, HeaderComponent, FooterComponent]
+
+const modules = [BrowserModule, AppRoutingModule, AuthModule, NgbModule]
+
+const service = []
+
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent],
-  imports: [BrowserModule, AppRoutingModule, AuthModule, NgbModule],
+  declarations: [...components],
+  imports: [...modules],
   providers: [],
   bootstrap: [AppComponent],
 })

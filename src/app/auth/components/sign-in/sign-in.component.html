@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <div class="form">
+    <form [formGroup]="form" (ngSubmit)="onSignUp()" novalidate autocomplete="off">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          autocomplete="off"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          id="email"
+          [ngClass]="{
+            invalidBorder:
+              form.controls['email'].touched && form.controls['email'].invalid
+          }"
+        />
+        <div
+          class="validation-alert"
+          *ngIf="
+            form.controls['email'].touched && form.controls['email'].invalid
+          "
+        >
+          * Please enter valid email
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="input-container">
+          <label for="password" class="form-label">Password</label>
+          <input
+            [type]="hide ? 'password' : 'text'"
+            class="form-control"
+            formControlName="password"
+            id="password"
+            [ngClass]="{
+              invalidBorder:
+                form.controls['password'].touched &&
+                form.controls['password'].invalid
+            }"
+          />
+          <i
+            (click)="toggle()"
+            class="bi"
+            [ngClass]="{ 'bi-eye': hide, 'bi-eye-slash': !hide }"
+          ></i>
+          <div
+            class="validation-alert"
+            *ngIf="
+              form.controls['password'].touched &&
+              form.controls['password'].invalid
+            "
+          >
+            * Password must be at least 8 characters long
+          </div>
+        </div>
+      </div>
+      <p class="mb-3">
+        If you have an account,
+        <a routerLink="/sign-in" class="form-link">Sign up</a>
+      </p>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        Sign in
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+@import '~src/app/constants/color';
+
+.wrapper {
+  width: 100vw;
+  height: 84vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-link {
+  color: $bgBlue;
+}
+
+.form {
+  width: 50vw;
+  height: 50vh;
+}
+
+.validation-alert {
+  color: red;
+}
+
+.invalidBorder {
+  border-color: red;
+}
+.btn-eye {
+  position: absolute;
+  top: 57%;
+  right: 25%;
+  width: 41px;
+  height: 47px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.bi {
+  position: absolute;
+  top: 38px;
+  right: 7px;
+  cursor: pointer;
+}
