@@ -1,0 +1,115 @@
+<div class="wrapper">
+  <div class="form">
+    <form [formGroup]="form" (ngSubmit)="onSignUp()" novalidate autocomplete="off">
+      <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            invalidBorder:
+              form.controls['firstName'].touched &&
+              form.controls['firstName'].invalid
+          }"
+          formControlName="firstName"
+          id="firstName"
+        />
+        <div
+          class="validation-alert"
+          *ngIf="
+            form.controls['firstName'].touched &&
+            form.controls['firstName'].invalid
+          "
+        >
+          * Please enter your First Name
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="lastName"
+          id="lastName"
+          [ngClass]="{
+            invalidBorder:
+              form.controls['lastName'].touched &&
+              form.controls['lastName'].invalid
+          }"
+        />
+        <div
+          class="validation-alert"
+          *ngIf="
+            form.controls['lastName'].touched &&
+            form.controls['lastName'].invalid
+          "
+        >
+         * Please enter your Last Name
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          autocomplete="off"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          id="email"
+          aria-describedby="emailHelp"
+          [ngClass]="{
+            invalidBorder:
+              form.controls['email'].touched && form.controls['email'].invalid
+          }"
+        />
+        <div
+          class="validation-alert"
+          *ngIf="
+            form.controls['email'].touched && form.controls['email'].invalid
+          "
+        >
+          * Please enter valid email
+        </div>
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="input-container">
+          <label for="password" class="form-label">Password</label>
+          <input
+            [type]="hide ? 'password' : 'text'"
+            class="form-control"
+            formControlName="password"
+            id="password"
+            [ngClass]="{
+              invalidBorder:
+                form.controls['password'].touched &&
+                form.controls['password'].invalid
+            }"
+          />
+            <i
+              (click)="toggle()"
+              class="bi"
+              [ngClass]="{ 'bi-eye': hide, 'bi-eye-slash': !hide }"
+            ></i>
+          <div
+            class="validation-alert"
+            *ngIf="
+              form.controls['password'].touched &&
+              form.controls['password'].invalid
+            "
+          >
+            * Password must be at least 8 characters long
+          </div>
+        </div>
+      </div>
+      <p class="mb-3">
+        If you have an account,
+        <a routerLink="/sign-in" class="form-link">Sign in</a>
+      </p>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        Sign up
+      </button>
+    </form>
+  </div>
+</div>
