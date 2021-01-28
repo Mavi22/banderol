@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
+import { AuthService } from '../../service/auth.service'
+import { SpinnerService } from '../../../shared/components/service/spinner.service'
 
 @Component({
   selector: 'app-sign-in',
@@ -12,16 +14,15 @@ export class SignInComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
   })
-  constructor(readonly fb: FormBuilder) {}
+  constructor(readonly fb: FormBuilder, readonly authService: AuthService) {}
 
   ngOnInit(): void {}
-
-  onSignUp(): void {
-    this.form.reset()
-  }
 
   toggle(): void {
     this.hide = !this.hide
   }
-  onSignIn(): void {}
+
+  onSignIn(): void {
+    this.form.reset()
+  }
 }

@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="form">
-    <form [formGroup]="form" (ngSubmit)="onSignUp()" novalidate autocomplete="off">
+    <form [formGroup]="form" (ngSubmit)="onSignIn()" novalidate autocomplete="off">
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input
@@ -39,8 +39,8 @@
           />
           <i
             (click)="toggle()"
-            class="bi"
-            [ngClass]="{ 'bi-eye': hide, 'bi-eye-slash': !hide }"
+            class="eye-icon"
+            [ngClass]="{ 'bi bi-eye': !hide, 'bi bi-eye-slash': hide }"
           ></i>
           <div
             class="validation-alert"
@@ -54,8 +54,8 @@
         </div>
       </div>
       <p class="mb-3">
-        If you have an account,
-        <a routerLink="/sign-in" class="form-link">Sign up</a>
+        If you don't have an account,
+        <a routerLink="/auth/sign-up" class="form-link">Sign up</a>
       </p>
       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
         Sign in

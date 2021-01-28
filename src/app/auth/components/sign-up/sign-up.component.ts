@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
+import { Store } from '@ngrx/store'
+import { authAction } from '../../store/actions/auth.action'
+import { AuthService } from '../../service/auth.service'
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: 'sign-up.component.html',
   styleUrls: ['sign-up.component.scss'],
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnChanges {
   hide = true
   form = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z ]+$')]],
@@ -15,11 +18,21 @@ export class SignUpComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8)]],
   })
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 
+  ngOnChanges(): void {}
+
   onSignUp(): void {
+    // this.authService
+    //   .onSignUp(this.form.value.email, this.form.value.password)
+    //   .subscribe()
+    this.store.dispatch(authAction(this.form.value))
     this.form.reset()
   }
 
