@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { SpinnerService } from '../service/spinner.service'
 
 @Component({
@@ -16,6 +16,7 @@ import { SpinnerService } from '../service/spinner.service'
     </div>
   `,
   styleUrls: ['spinner.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpinnerComponent {
   constructor(public spinnerService: SpinnerService) {}

@@ -13,7 +13,6 @@ import firebase from 'firebase/app'
 import { environment } from '../environments/environment'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { SpinnerService } from './shared/components/service/spinner.service'
 
 firebase.initializeApp(environment.firebase)
 
@@ -27,7 +26,6 @@ const components = [
 const modules = [
   BrowserModule,
   AppRoutingModule,
-  AuthModule,
   NgbModule,
   AngularFireModule.initializeApp(environment.firebase),
   StoreModule.forRoot({}),
@@ -37,12 +35,9 @@ const modules = [
   }),
 ]
 
-const service = [SpinnerService]
-
 @NgModule({
   declarations: [...components],
   imports: [...modules],
-  providers: [...service],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

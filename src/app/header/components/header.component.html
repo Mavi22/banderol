@@ -4,9 +4,14 @@
       <span class="logo">Banderol</span>
       <i class="bi bi-chat-left" ></i>
     </div>
-    <div class="header-btn">
-      <button type="button" routerLink="auth/sign-in" class="btn btn-custom mr-2">Sign in</button>
-      <button type="button" routerLink="auth/sign-up" class="btn btn-custom mr-3">Sign up</button>
+    <div class="header-btn" *ngIf="authService.userOnline$ | async; else logout">
+      <button type="button" (click)="Logout()" class="btn btn-custom mr-2">Logout</button>
     </div>
+    <ng-template #logout>
+      <div class="header-btn">
+        <button type="button" routerLink="auth/sign-in" class="btn btn-custom mr-2">Sign in</button>
+        <button type="button" routerLink="auth/sign-up" class="btn btn-custom mr-3">Sign up</button>
+      </div>
+    </ng-template>
   </div>
 </div>
