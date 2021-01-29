@@ -1,5 +1,11 @@
 <div class="wrapper">
     <form [formGroup]="form" class="form" (ngSubmit)="onSignUp()" novalidate autocomplete="off">
+      <div
+        class="validation-alert"
+        *ngIf="error"
+      >
+        {{error | uppercase}}
+      </div>
       <div class="mb-3">
         <label for="firstName" class="form-label">First Name</label>
         <input
@@ -57,13 +63,13 @@
           aria-describedby="emailHelp"
           [ngClass]="{
             invalidBorder:
-              form.controls['email'].touched && form.controls['email'].invalid
+              (form.controls['email'].touched && form.controls['email'].invalid)
           }"
         />
         <div
           class="validation-alert"
           *ngIf="
-            form.controls['email'].touched && form.controls['email'].invalid
+            (form.controls['email'].touched && form.controls['email'].invalid)
           "
         >
           * Please enter valid email

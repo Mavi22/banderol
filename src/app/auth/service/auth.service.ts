@@ -5,9 +5,9 @@ import 'firebase/auth'
 import { BehaviorSubject, Observable } from 'rxjs'
 import UserCredential = firebase.auth.UserCredential
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  userOnline$ = new BehaviorSubject(false)
+  userOnline$ = new BehaviorSubject<firebase.User | null>(null)
   constructor(public af: AngularFireAuth) {}
 
   onSignUp(email: string, password: string): Observable<UserCredential> {
@@ -16,28 +16,32 @@ export class AuthService {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((resp) => subscriber.next(resp))
+        .catch((err) => subscriber.error(err))
     })
   }
 
-  onSignUpWithFacebook(): any {
-    const provider = new firebase.auth.FacebookAuthProvider()
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((resp) => console.log(resp))
+  onSignIn(email: string, password: string): Observable<UserCredential> {
+    return new Observable<UserCredential>((subscriber) => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((resp) => subscriber.next(resp))
+        .catch((err) => subscriber.error(err))
+    })
   }
 
   check(): any {
     firebase.auth().onAuthStateChanged((user) => {
+      console.log(user)
       if (user) {
-        this.userOnline$.next(true)
+        this.userOnline$.next(user)
       } else {
-        this.userOnline$.next(false)
+        this.userOnline$.next(null)
       }
     })
   }
 
-  logout(): void {
-    firebase.auth().signOut().then()
+  logout(): Promise<void> {
+    return firebase.auth().signOut()
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SpinnerService {
-  spinner$ = new BehaviorSubject<boolean>(false)
+  public readonly spinner$ = new BehaviorSubject<boolean>(false)
 }
