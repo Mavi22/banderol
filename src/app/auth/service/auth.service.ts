@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { Observable } from 'rxjs'
 import UserCredential = firebase.auth.UserCredential
+import User = firebase.User
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  userOnline$ = new BehaviorSubject<firebase.User | null>(null)
+  userToken = localStorage.getItem('user-token')
   constructor(public af: AngularFireAuth) {}
 
   onSignUp(email: string, password: string): Observable<UserCredential> {
@@ -30,14 +31,11 @@ export class AuthService {
     })
   }
 
-  check(): any {
-    firebase.auth().onAuthStateChanged((user) => {
-      console.log(user)
-      if (user) {
-        this.userOnline$.next(user)
-      } else {
-        this.userOnline$.next(null)
-      }
+  getUser(): Observable<User | null> {
+    return new Observable((subscriber) => {
+      firebase.auth().onAuthStateChanged((user) => {
+        subscriber.next(user)
+      })
     })
   }
 

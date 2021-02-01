@@ -9,7 +9,5 @@ import { AuthService } from './auth/service/auth.service'
 })
 export class AppComponent {
   title = 'banderol'
-  constructor(readonly authService: AuthService) {
-    this.authService.check()
-  }
+  constructor(readonly authService: AuthService) {}
 }

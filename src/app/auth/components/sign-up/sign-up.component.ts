@@ -9,6 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { authAction } from '../../store/actions/auth.action'
 import { AuthService } from '../../service/auth.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-sign-up',
@@ -36,7 +37,8 @@ export class SignUpComponent implements OnInit, OnChanges {
     private fb: FormBuilder,
     private store: Store,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -49,6 +51,7 @@ export class SignUpComponent implements OnInit, OnChanges {
       .subscribe(
         (user) => {
           console.log('user', user)
+          this.router.navigate(['/main'])
         },
         (error) => {
           this.error = error.message
