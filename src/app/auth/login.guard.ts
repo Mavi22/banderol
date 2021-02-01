@@ -5,11 +5,11 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router'
-import { Observable } from 'rxjs'
 import { AuthService } from './service/auth.service'
+import { Observable } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -17,12 +17,13 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     return new Observable((observer) => {
       this.authService.getUser().subscribe((user) => {
-        if (user) {
+        if (!user) {
           observer.next(true)
         } else {
+          if (state.url !== 'main') {
+            this.router.navigate(['main'])
+          }
           observer.next(false)
-          this.authService.logout()
-          this.router.navigate(['/auth/sign-in'])
         }
       })
     })

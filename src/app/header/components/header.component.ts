@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core'
 import { AuthService } from '../../auth/service/auth.service'
 import { Router } from '@angular/router'
+import firebase from 'firebase'
+import User = firebase.User
 
 @Component({
   selector: 'app-header',
@@ -9,12 +16,24 @@ import { Router } from '@angular/router'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  constructor(readonly authService: AuthService, readonly router: Router) {}
-  ngOnInit(): void {}
+  user!: User | null
+  constructor(
+    readonly authService: AuthService,
+    readonly router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
+  ngOnInit(): void {
+    this.authService.getUser().subscribe((user) => {
+      this.user = user
+      this.cdr.markForCheck()
+    })
+  }
 
-  Logout(): void {
+  logout(): void {
     this.authService.logout().then(() => {
+      localStorage.clear()
       this.router.navigate(['/auth/sign-in'])
+      this.cdr.markForCheck()
     })
   }
 }
