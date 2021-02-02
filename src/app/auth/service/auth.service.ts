@@ -5,6 +5,7 @@ import 'firebase/auth'
 import { Observable } from 'rxjs'
 import UserCredential = firebase.auth.UserCredential
 import User = firebase.User
+import { FirebaseUserInterface } from '../../shared/type/firebaseUser.interface'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -21,12 +22,19 @@ export class AuthService {
     })
   }
 
+  updateFirebaseUser(value: FirebaseUserInterface): void {
+    firebase.auth().currentUser?.updateProfile(value)
+  }
+
   onSignIn(email: string, password: string): Observable<UserCredential> {
     return new Observable<UserCredential>((subscriber) => {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then((resp) => subscriber.next(resp))
+        .then((resp) => {
+          console.log(resp.user?.displayName)
+          subscriber.next(resp)
+        })
         .catch((err) => subscriber.error(err))
     })
   }
