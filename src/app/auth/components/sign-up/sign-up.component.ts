@@ -50,6 +50,7 @@ export class SignUpComponent implements OnInit, OnChanges {
       .onSignUp(this.form.value.email, this.form.value.password)
       .subscribe(
         (user) => {
+          console.log(1)
           this.authService.updateFirebaseUser({
             displayName: this.form.value.firstName,
           })
