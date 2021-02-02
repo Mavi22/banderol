@@ -50,16 +50,17 @@ export class SignUpComponent implements OnInit, OnChanges {
       .onSignUp(this.form.value.email, this.form.value.password)
       .subscribe(
         (user) => {
-          console.log('user', user)
+          this.authService.updateFirebaseUser({
+            displayName: this.form.value.firstName,
+          })
           this.router.navigate(['/main'])
+          this.store.dispatch(authAction(this.form.value))
         },
         (error) => {
           this.error = error.message
           this.cdr.detectChanges()
         }
       )
-    this.store.dispatch(authAction(this.form.value))
-    this.form.reset()
   }
 
   toggle(): void {

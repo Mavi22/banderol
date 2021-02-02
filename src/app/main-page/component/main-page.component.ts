@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
+import firebase from 'firebase/app'
 
 @Component({
   selector: 'app-main-page',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
   styleUrls: ['main-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainPageComponent {}
+export class MainPageComponent {
+  constructor() {}
+}
