@@ -1,0 +1,34 @@
+@import '~src/app/constants/color';
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bi {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: $bgBlue;
+  margin-right: 5px;
+}
+
+.search_input {
+  border: 2px solid $bgBlue;
+  border-radius: 5px;
+  outline: none;
+  width: 85%;
+  transition: .3s ease-in-out;
+}
+.search_input:focus {
+  opacity: .6;
+}
+
+a {
+  margin-right: 10px;
+}

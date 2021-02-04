@@ -1,0 +1,39 @@
+@import '~src/app/constants/color';
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: $blue;
+  display: grid;
+  grid-template-columns: 12fr;
+  grid-template-rows: 11fr 1fr;
+}
+
+textarea {
+  resize: none;
+}
+
+.wrapper_input {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textarea {
+  border: 2px solid transparent;
+  background-color: $inputColor;
+  outline: none;
+  color: $white;
+  width: 85%;
+  transition: .3s ease-in-out;
+}
+
+.btn {
+  background-color: $inputColor;
+  color: $white;
+  border-radius: 0px;
+
+}
+

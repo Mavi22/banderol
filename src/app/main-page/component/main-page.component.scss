@@ -1,0 +1,26 @@
+@import '~src/app/constants/color';
+@import "~bootstrap";
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  grid-template-rows: 0.5fr 11.5fr;
+  grid-template-areas:  'menu messages'
+                        'chats messages';
+  grid-column-gap: 5px;
+}
+
+.menu {
+  grid-area: menu;
+}
+
+.chats {
+  grid-area: chats;
+}
+
+.messages {
+  grid-area: messages;
+}
+
