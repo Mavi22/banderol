@@ -32,7 +32,6 @@ export class AuthService {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((resp) => {
-          console.log(resp.user?.displayName)
           subscriber.next(resp)
         })
         .catch((err) => subscriber.error(err))
@@ -48,6 +47,7 @@ export class AuthService {
   }
 
   logout(): Promise<void> {
+    localStorage.clear()
     return firebase.auth().signOut()
   }
 }
